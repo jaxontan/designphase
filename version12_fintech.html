@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -19,17 +19,17 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        base: "#000000",
-                        surface: "#0A0A0B",
-                        "surface-elevated": "#121214",
-                        "surface-highlight": "#1A1A1D",
-                        border: "#27272A",
-                        "border-highlight": "#3F3F46",
-                        primary: "#6366F1", /* Indigo */
-                        secondary: "#06B6D4", /* Cyan */
-                        "text-main": "#FAFAFA",
-                        "text-muted": "#A1A1AA",
-                        "text-faint": "#52525B",
+                        base: "#F9FAFB",
+                        surface: "#FFFFFF",
+                        "surface-elevated": "#F3F4F6",
+                        "surface-highlight": "#E5E7EB",
+                        border: "#E5E7EB",
+                        "border-highlight": "#D1D5DB",
+                        primary: "#4F46E5",
+                        secondary: "#0891B2",
+                        "text-main": "#111827",
+                        "text-muted": "#4B5563",
+                        "text-faint": "#9CA3AF",
                         danger: "#EF4444",
                         warning: "#F59E0B",
                         success: "#10B981"
@@ -50,34 +50,34 @@
             font-variation-settings: 'FILL' 0;
         }
         body {
-            background-color: #000000;
-            color: #FAFAFA;
+            background-color: #F9FAFB;
+            color: #111827;
         }
-        /* Premium Dark UI Cards */
+        /* Premium Light UI Cards */
         .saas-card {
-            background-color: #0A0A0B;
-            border: 1px solid #27272A;
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
         }
-        /* Very subtle top gradient highlight to simulate light hitting the card edge */
+        /* Very subtle top gradient highlight */
         .saas-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.03), transparent);
             z-index: 10;
         }
         .saas-card:hover {
-            border-color: #3F3F46;
-            background-color: #0C0C0D;
+            border-color: #D1D5DB;
+            background-color: #F8FAFC;
         }
         /* Glowing text gradient */
         .text-gradient {
-            background: linear-gradient(to right, #818CF8, #22D3EE);
+            background: linear-gradient(to right, #4F46E5, #0891B2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -85,11 +85,11 @@
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3F3F46; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen flex selection:bg-primary/30 selection:text-white">
+<body class="font-sans antialiased min-h-screen flex selection:bg-primary/30 selection:text-primary">
     <!-- Ambient background glow behind the layout -->
     <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-primary/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
     <!-- Sidebar -->
@@ -98,33 +98,33 @@
         <div class="h-20 flex items-center gap-3 px-6 border-b border-border">
             <div class="w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center p-[1px]">
                 <div class="w-full h-full bg-base rounded-[7px] flex items-center justify-center">
-                    <span class="material-symbols-rounded text-white text-sm">coffee_maker</span>
+                    <span class="material-symbols-rounded text-primary text-sm">coffee_maker</span>
                 </div>
             </div>
-            <span class="font-semibold text-lg tracking-tight text-white">EspressGo</span>
+            <span class="font-semibold text-lg tracking-tight text-text-main">EspressGo</span>
         </div>
         <!-- Navigation -->
         <nav class="flex-1 py-6 px-4 space-y-1">
             <p class="px-3 text-xs font-semibold text-text-faint uppercase tracking-wider mb-2">Platform</p>
-            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-elevated border border-border text-white transition-all group relative overflow-hidden">
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-elevated border border-border text-text-main transition-all group relative overflow-hidden">
                 <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 bg-primary rounded-r-full"></div>
                 <span class="material-symbols-rounded outlined text-[20px] text-primary">dashboard</span>
                 <span class="font-medium text-sm">Dashboard</span>
             </a>
-            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-white hover:bg-surface-elevated transition-all group">
-                <span class="material-symbols-rounded outlined text-[20px] group-hover:text-white transition-colors">local_shipping</span>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text-main hover:bg-surface-elevated transition-all group">
+                <span class="material-symbols-rounded outlined text-[20px] group-hover:text-text-main transition-colors">local_shipping</span>
                 <span class="font-medium text-sm">Fleet Operations</span>
             </a>
-            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-white hover:bg-surface-elevated transition-all group">
-                <span class="material-symbols-rounded outlined text-[20px] group-hover:text-white transition-colors">inventory_2</span>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text-main hover:bg-surface-elevated transition-all group">
+                <span class="material-symbols-rounded outlined text-[20px] group-hover:text-text-main transition-colors">inventory_2</span>
                 <span class="font-medium text-sm">Inventory Matrix</span>
             </a>
-            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-white hover:bg-surface-elevated transition-all group">
-                <span class="material-symbols-rounded outlined text-[20px] group-hover:text-white transition-colors">route</span>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text-main hover:bg-surface-elevated transition-all group">
+                <span class="material-symbols-rounded outlined text-[20px] group-hover:text-text-main transition-colors">route</span>
                 <span class="font-medium text-sm">Routing AI</span>
             </a>
             <p class="px-3 text-xs font-semibold text-text-faint uppercase tracking-wider mt-6 mb-2">Settings</p>
-            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-white hover:bg-surface-elevated transition-all group">
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text-main hover:bg-surface-elevated transition-all group">
                 <span class="material-symbols-rounded outlined text-[20px]">settings</span>
                 <span class="font-medium text-sm">Configuration</span>
             </a>
@@ -132,7 +132,7 @@
         <!-- Profile -->
         <div class="p-4 border-t border-border">
             <div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-elevated cursor-pointer transition-all">
-                <img src="https://ui-avatars.com/api/?name=Ops+Manager&background=121214&color=fff" alt="Profile" class="w-8 h-8 rounded-full border border-border">
+                <img src="https://ui-avatars.com/api/?name=Ops+Manager&background=E5E7EB&color=111827" alt="Profile" class="w-8 h-8 rounded-full border border-border">
                 <div class="flex flex-col flex-1">
                     <span class="text-sm font-medium text-text-main">M. Wright</span>
                     <span class="text-[10px] text-text-faint">Pro Workspace</span>
@@ -161,11 +161,11 @@
                     <span class="text-[10px] font-medium text-success uppercase tracking-wide">System Normal</span>
                 </div>
                 <div class="w-px h-5 bg-border"></div>
-                <button class="relative text-text-muted hover:text-white transition-colors">
+                <button class="relative text-text-muted hover:text-text-main transition-colors">
                     <span class="material-symbols-rounded outlined">notifications</span>
                     <span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full border border-base"></span>
                 </button>
-                <button class="bg-white text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition-colors flex items-center gap-1.5">
+                <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors flex items-center gap-1.5">
                     <span class="material-symbols-rounded text-[18px]">add</span>
                     New Dispatch
                 </button>
@@ -175,7 +175,7 @@
         <div class="flex-1 overflow-y-auto p-8">
             <!-- Page Title -->
             <div class="mb-8">
-                <h1 class="text-2xl font-bold text-white mb-1">Global Dashboard</h1>
+                <h1 class="text-2xl font-bold text-text-main mb-1">Global Dashboard</h1>
                 <p class="text-sm text-text-muted font-medium">Real-time metrics and operational alerts for the active fleet.</p>
             </div>
             <!-- KPI Grid -->
@@ -190,7 +190,7 @@
                     </div>
                     <div class="flex items-end justify-between">
                         <div>
-                            <h2 class="text-3xl font-bold text-white mb-1">99.98<span class="text-lg text-text-muted">%</span></h2>
+                            <h2 class="text-3xl font-bold text-text-main mb-1">99.98<span class="text-lg text-text-muted">%</span></h2>
                             <p class="text-xs font-medium text-success flex items-center gap-1">
                                 <span class="material-symbols-rounded text-[14px]">trending_up</span> +0.02%
                             </p>
@@ -213,7 +213,7 @@
                     </div>
                     <div class="flex items-end justify-between">
                         <div class="w-full">
-                            <h2 class="text-3xl font-bold text-white mb-2">142<span class="text-lg text-text-muted font-normal"> / 150</span></h2>
+                            <h2 class="text-3xl font-bold text-text-main mb-2">142<span class="text-lg text-text-muted font-normal"> / 150</span></h2>
                             <div class="w-full h-1.5 bg-surface-highlight rounded-full overflow-hidden mb-1.5">
                                 <div class="h-full bg-gradient-brand rounded-full relative" style="width: 94%">
                                     <div class="absolute inset-0 bg-white/20"></div>
@@ -236,7 +236,7 @@
                     </div>
                     <div class="flex items-end justify-between">
                         <div>
-                            <h2 class="text-3xl font-bold text-white mb-1">96.4<span class="text-lg text-text-muted">%</span></h2>
+                            <h2 class="text-3xl font-bold text-text-main mb-1">96.4<span class="text-lg text-text-muted">%</span></h2>
                             <p class="text-xs font-medium text-text-muted">Target: >95.0%</p>
                         </div>
                         <!-- Mini Bar Chart placeholder -->
@@ -257,31 +257,31 @@
                     <div class="px-5 py-4 border-b border-border flex items-center justify-between bg-surface/50">
                         <div class="flex items-center gap-2">
                             <div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(6,182,212,0.8)]"></div>
-                            <h3 class="text-sm font-semibold text-white">Live Territory Map</h3>
+                            <h3 class="text-sm font-semibold text-text-main">Live Territory Map</h3>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button class="p-1 text-text-muted hover:text-white transition-colors rounded hover:bg-surface-elevated"><span class="material-symbols-rounded text-[18px]">zoom_in</span></button>
-                            <button class="p-1 text-text-muted hover:text-white transition-colors rounded hover:bg-surface-elevated"><span class="material-symbols-rounded text-[18px]">zoom_out</span></button>
-                            <button class="p-1 text-text-muted hover:text-white transition-colors rounded hover:bg-surface-elevated ml-2"><span class="material-symbols-rounded text-[18px]">more_vert</span></button>
+                            <button class="p-1 text-text-muted hover:text-text-main transition-colors rounded hover:bg-surface-elevated"><span class="material-symbols-rounded text-[18px]">zoom_in</span></button>
+                            <button class="p-1 text-text-muted hover:text-text-main transition-colors rounded hover:bg-surface-elevated"><span class="material-symbols-rounded text-[18px]">zoom_out</span></button>
+                            <button class="p-1 text-text-muted hover:text-text-main transition-colors rounded hover:bg-surface-elevated ml-2"><span class="material-symbols-rounded text-[18px]">more_vert</span></button>
                         </div>
                     </div>
                     <!-- Dark Styled Map Area -->
-                    <div class="flex-1 relative overflow-hidden bg-[#050505]">
+                    <div class="flex-1 relative overflow-hidden bg-[#F9FAFB]">
                         <!-- Subtle Map Grid/Lines -->
-                        <div class="absolute inset-0" style="background-image: radial-gradient(#27272A 1px, transparent 1px); background-size: 24px 24px; opacity: 0.5;"></div>
+                        <div class="absolute inset-0" style="background-image: radial-gradient(#E5E7EB 1px, transparent 1px); background-size: 24px 24px; opacity: 0.5;"></div>
                         <!-- Map Pins -->
                         <div class="absolute top-1/3 left-1/4 group cursor-pointer">
                             <div class="relative">
-                                <div class="w-3 h-3 bg-secondary rounded-full border-2 border-[#050505] shadow-[0_0_10px_rgba(6,182,212,0.6)]"></div>
+                                <div class="w-3 h-3 bg-secondary rounded-full border-2 border-[#F9FAFB] shadow-[0_0_10px_rgba(6,182,212,0.6)]"></div>
                                 <div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                                    <div class="bg-surface-elevated border border-border px-2 py-1 rounded text-[10px] font-semibold text-white whitespace-nowrap shadow-lg">Unit #402</div>
+                                    <div class="bg-surface-elevated border border-border px-2 py-1 rounded text-[10px] font-semibold text-text-main whitespace-nowrap shadow-lg">Unit #402</div>
                                 </div>
                             </div>
                         </div>
                         <div class="absolute top-1/2 right-1/3 group cursor-pointer z-10">
                             <div class="relative">
                                 <div class="absolute inset-0 bg-danger rounded-full animate-ping opacity-75"></div>
-                                <div class="w-4 h-4 bg-danger rounded-full border-2 border-[#050505] relative z-10"></div>
+                                <div class="w-4 h-4 bg-danger rounded-full border-2 border-[#F9FAFB] relative z-10"></div>
                                 <div class="absolute top-full mt-2 left-1/2 -translate-x-1/2">
                                     <div class="bg-danger/10 border border-danger/30 px-2 py-1 rounded text-[10px] font-semibold text-danger whitespace-nowrap shadow-lg backdrop-blur-md">Unit #118 - ERR</div>
                                 </div>
@@ -289,9 +289,9 @@
                         </div>
                         <div class="absolute bottom-1/4 left-1/2 group cursor-pointer">
                             <div class="relative">
-                                <div class="w-3 h-3 bg-text-muted rounded-full border-2 border-[#050505]"></div>
+                                <div class="w-3 h-3 bg-text-muted rounded-full border-2 border-[#F9FAFB]"></div>
                                 <div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                                    <div class="bg-surface-elevated border border-border px-2 py-1 rounded text-[10px] font-semibold text-white whitespace-nowrap shadow-lg">Unit #883</div>
+                                    <div class="bg-surface-elevated border border-border px-2 py-1 rounded text-[10px] font-semibold text-text-main whitespace-nowrap shadow-lg">Unit #883</div>
                                 </div>
                             </div>
                         </div>
@@ -311,11 +311,11 @@
                                     <span class="material-symbols-rounded text-danger text-[18px]">thermostat</span>
                                 </div>
                                 <div>
-                                    <h4 class="text-sm font-semibold text-white mb-1">Thermal Override</h4>
+                                    <h4 class="text-sm font-semibold text-text-main mb-1">Thermal Override</h4>
                                     <p class="text-xs text-text-muted leading-relaxed mb-4">Unit #118 reporting boiler temp of 104°C. Safety shutdown engaged.</p>
                                     <div class="flex gap-2">
-                                        <button class="text-xs font-semibold bg-white text-black px-3 py-1.5 rounded-md hover:bg-gray-200 transition-colors">Dispatch Tech</button>
-                                        <button class="text-xs font-medium text-text-muted hover:text-white px-3 py-1.5 rounded-md hover:bg-surface-elevated transition-colors border border-transparent hover:border-border">Dismiss</button>
+                                        <button class="text-xs font-semibold bg-primary text-white px-3 py-1.5 rounded-md hover:bg-primary/90 transition-colors">Dispatch Tech</button>
+                                        <button class="text-xs font-medium text-text-muted hover:text-text-main px-3 py-1.5 rounded-md hover:bg-surface-elevated transition-colors border border-transparent hover:border-border">Dismiss</button>
                                     </div>
                                 </div>
                             </div>
@@ -335,7 +335,7 @@
                                 </div>
                                 <div class="flex-1">
                                     <div class="flex justify-between items-center mb-0.5">
-                                        <p class="text-sm font-medium text-white">Dispatch #4092</p>
+                                        <p class="text-sm font-medium text-text-main">Dispatch #4092</p>
                                         <span class="text-[10px] text-primary font-medium bg-primary/10 px-1.5 py-0.5 rounded">LIVE</span>
                                     </div>
                                     <p class="text-xs text-text-faint">Departed Hub A for Zone 2.</p>
@@ -348,7 +348,7 @@
                                 </div>
                                 <div class="flex-1">
                                     <div class="flex justify-between items-center mb-0.5">
-                                        <p class="text-sm font-medium text-white">Maintenance</p>
+                                        <p class="text-sm font-medium text-text-main">Maintenance</p>
                                         <span class="text-[10px] text-text-faint font-medium">14m</span>
                                     </div>
                                     <p class="text-xs text-text-faint">Unit #118 hardware verified.</p>
@@ -363,7 +363,7 @@
 <!-- Version Switcher Sidebar -->
 <div class="fixed top-1/2 right-0 -translate-y-1/2 z-[100] group font-sans">
     <!-- Toggle Button -->
-    <div class="bg-indigo-600 text-white p-3 rounded-l-lg shadow-lg cursor-pointer flex items-center justify-center group-hover:hidden">
+    <div class="bg-indigo-600 text-text-main p-3 rounded-l-lg shadow-lg cursor-pointer flex items-center justify-center group-hover:hidden">
         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
     </div>
     <!-- Sidebar Content -->
