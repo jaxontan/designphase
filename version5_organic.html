@@ -52,13 +52,11 @@
         .material-symbols-rounded.outlined {
             font-variation-settings: 'FILL' 0;
         }
-        
         body {
             background-color: #E8E9E3;
             background-image: 
                 url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.04%22/%3E%3C/svg%3E');
         }
-
         /* Neo-Brutalist Elements */
         .brutal-card {
             background: #F7F6F0;
@@ -66,12 +64,10 @@
             box-shadow: 4px 4px 0px 0px #232D1E;
             transition: all 0.15s ease-out;
         }
-
         .brutal-card:hover {
             transform: translate(2px, 2px);
             box-shadow: 2px 2px 0px 0px #232D1E;
         }
-
         .brutal-button {
             background: #D96C4A;
             color: #F7F6F0;
@@ -80,22 +76,18 @@
             font-weight: 700;
             transition: all 0.1s ease-out;
         }
-        
         .brutal-button:hover {
             transform: translate(1px, 1px);
             box-shadow: 2px 2px 0px 0px #232D1E;
         }
-
         .brutal-button:active {
             transform: translate(3px, 3px);
             box-shadow: 0px 0px 0px 0px #232D1E;
         }
-
         .brutal-badge {
             border: 1.5px solid #232D1E;
             box-shadow: 2px 2px 0px 0px #232D1E;
         }
-
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -111,7 +103,6 @@
     </style>
 </head>
 <body class="font-sans text-text-main antialiased selection:bg-secondary/20 selection:text-text-main min-h-screen flex">
-
 <!-- Sidebar -->
 <aside class="w-64 fixed h-full z-50 bg-surface border-r-2 border-border flex flex-col py-6 px-4">
     <!-- Brand -->
@@ -124,7 +115,6 @@
             <span class="text-[10px] font-bold text-primary uppercase tracking-[0.1em] border-2 border-border px-1.5 py-0.5 rounded shadow-[1px_1px_0_#232D1E] w-max mt-0.5 bg-surface-elevated">Ops Hub</span>
         </div>
     </div>
-
     <!-- Navigation -->
     <nav class="flex-1 space-y-3">
         <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-tertiary text-text-main border-2 border-border shadow-brutal transition-all font-display font-bold">
@@ -148,7 +138,6 @@
             <span class="text-sm">Analytics</span>
         </a>
     </nav>
-
     <!-- Bottom Actions -->
     <div class="pt-6 border-t-2 border-border space-y-4">
         <button class="w-full brutal-button py-3 px-4 rounded-2xl text-sm flex items-center justify-center gap-2">
@@ -165,10 +154,8 @@
         </div>
     </div>
 </aside>
-
 <!-- Main Content -->
 <main class="ml-64 flex-1 flex flex-col min-h-screen relative">
-    
     <!-- Header -->
     <header class="h-24 bg-surface sticky top-0 z-40 px-8 flex items-center justify-between border-b-2 border-border">
         <div class="relative w-[28rem]">
@@ -179,7 +166,6 @@
                 <kbd class="border-2 border-border rounded-lg px-2 py-1 text-[10px] font-bold text-text-main bg-surface shadow-[1px_1px_0_#232D1E]">⌘K</kbd>
             </div>
         </div>
-
         <div class="flex items-center gap-6">
             <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary text-surface border-2 border-border shadow-brutal">
                 <span class="relative flex h-2.5 w-2.5">
@@ -188,7 +174,6 @@
                 </span>
                 <span class="text-xs font-display font-bold uppercase tracking-wider">System Optimal</span>
             </div>
-            
             <div class="flex items-center gap-4">
                 <button class="relative w-12 h-12 rounded-2xl border-2 border-border bg-white flex items-center justify-center hover:-translate-y-1 hover:-translate-x-1 hover:shadow-brutal transition-all">
                     <span class="material-symbols-rounded">notifications</span>
@@ -197,10 +182,8 @@
             </div>
         </div>
     </header>
-
     <!-- Dashboard Content -->
     <div class="p-8 max-w-7xl mx-auto w-full space-y-10">
-        
         <!-- Page Title -->
         <div class="flex items-end justify-between border-b-2 border-border pb-6">
             <div>
@@ -212,7 +195,6 @@
                 <div class="font-display font-bold text-text-main">Just Now</div>
             </div>
         </div>
-
         <!-- KPI Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- KPI 1 -->
@@ -233,7 +215,6 @@
                     <span class="text-text-muted text-xs font-semibold">vs last 24h</span>
                 </div>
             </div>
-
             <!-- KPI 2 -->
             <div class="brutal-card rounded-3xl p-6 relative overflow-hidden bg-white">
                 <div class="flex justify-between items-start mb-6">
@@ -253,7 +234,6 @@
                     <span class="bg-tertiary px-2 py-0.5 rounded border border-border">94% Active</span>
                 </p>
             </div>
-
             <!-- KPI 3 -->
             <div class="brutal-card rounded-3xl p-6 relative overflow-hidden">
                 <div class="flex justify-between items-start mb-6">
@@ -274,10 +254,8 @@
                 </div>
             </div>
         </div>
-
         <!-- Main Content Area -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
             <!-- Map/Live View -->
             <div class="lg:col-span-2 brutal-card rounded-3xl flex flex-col h-[520px] overflow-hidden bg-white p-0">
                 <div class="p-5 flex items-center justify-between border-b-2 border-border bg-tertiary">
@@ -293,13 +271,11 @@
                 <div class="flex-1 relative bg-surface overflow-hidden">
                     <!-- Retro Print Grid Background -->
                     <div class="absolute inset-0" style="background-image: repeating-linear-gradient(#232D1E 0 1px, transparent 1px 100%), repeating-linear-gradient(90deg, #232D1E 0 1px, transparent 1px 100%); background-size: 40px 40px; opacity: 0.05;"></div>
-                    
                     <!-- Topographic-like accents -->
                     <svg class="absolute inset-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M 0 100 Q 150 150 300 100 T 600 100 T 900 150" fill="none" stroke="#232D1E" stroke-width="2"/>
                         <path d="M 0 150 Q 150 200 300 150 T 600 150 T 900 200" fill="none" stroke="#232D1E" stroke-width="2"/>
                     </svg>
-
                     <!-- Map Pins -->
                     <div class="absolute top-1/3 left-1/3 flex flex-col items-center hover:z-10 cursor-pointer group">
                         <div class="w-6 h-6 rounded-full bg-secondary border-2 border-border shadow-[2px_2px_0_#232D1E] flex items-center justify-center group-hover:-translate-y-1 transition-transform">
@@ -307,21 +283,18 @@
                         </div>
                         <span class="mt-2 px-2 py-1 rounded-lg bg-white border-2 border-border shadow-[2px_2px_0_#232D1E] text-[10px] font-bold text-text-main group-hover:bg-secondary group-hover:text-surface transition-colors">UNIT-402</span>
                     </div>
-
                     <div class="absolute top-1/2 right-1/3 flex flex-col items-center hover:z-10 cursor-pointer group">
                         <div class="w-6 h-6 rounded-full bg-primary border-2 border-border shadow-[2px_2px_0_#232D1E] flex items-center justify-center animate-bounce">
                             <span class="material-symbols-rounded text-surface text-[12px]">warning</span>
                         </div>
                         <span class="mt-2 px-2 py-1 rounded-lg bg-white border-2 border-border shadow-[2px_2px_0_#232D1E] text-[10px] font-bold text-primary">UNIT-118</span>
                     </div>
-
                     <div class="absolute bottom-1/4 left-1/2 flex flex-col items-center hover:z-10 cursor-pointer group">
                         <div class="w-6 h-6 rounded-full bg-tertiary border-2 border-border shadow-[2px_2px_0_#232D1E] flex items-center justify-center group-hover:-translate-y-1 transition-transform">
                             <div class="w-2 h-2 bg-text-main rounded-full"></div>
                         </div>
                         <span class="mt-2 px-2 py-1 rounded-lg bg-white border-2 border-border shadow-[2px_2px_0_#232D1E] text-[10px] font-bold text-text-main">UNIT-883</span>
                     </div>
-
                     <!-- Legend Overlay -->
                     <div class="absolute bottom-5 left-5 bg-white border-2 border-border rounded-2xl p-4 flex gap-6 text-xs font-bold shadow-[4px_4px_0_#232D1E]">
                         <div class="flex items-center gap-2">
@@ -339,14 +312,12 @@
                     </div>
                 </div>
             </div>
-
             <!-- Alerts & Activity Side Column -->
             <div class="space-y-6 flex flex-col">
                 <!-- Critical Alert -->
                 <div class="bg-primary/10 border-2 border-border rounded-3xl p-5 relative shadow-[4px_4px_0_#232D1E] overflow-hidden">
                     <!-- Hatch pattern decoration -->
                     <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #232D1E 0, #232D1E 1px, transparent 1px, transparent 6px);"></div>
-                    
                     <div class="relative z-10">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3">
@@ -364,7 +335,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Recent Activity List -->
                 <div class="brutal-card rounded-3xl p-6 flex-1 flex flex-col">
                     <div class="flex items-center justify-between mb-6 border-b-2 border-border pb-4">
@@ -372,7 +342,6 @@
                         <button class="text-text-main font-bold text-xs uppercase tracking-widest border-2 border-border px-3 py-1 rounded-lg hover:bg-tertiary transition-colors shadow-[1px_1px_0_#232D1E]">View All</button>
                     </div>
                     <div class="space-y-4">
-                        
                         <!-- Activity Item -->
                         <div class="flex items-start gap-4">
                             <div class="flex items-center justify-center w-10 h-10 rounded-xl border-2 border-border bg-tertiary text-text-main shrink-0 shadow-[2px_2px_0_#232D1E]">
@@ -386,7 +355,6 @@
                                 <div class="text-xs text-text-muted font-medium">Departed for Zone 2 restock.</div>
                             </div>
                         </div>
-                        
                         <!-- Activity Item -->
                         <div class="flex items-start gap-4">
                             <div class="flex items-center justify-center w-10 h-10 rounded-xl border-2 border-border bg-white text-text-main shrink-0 shadow-[2px_2px_0_#232D1E]">
@@ -400,22 +368,18 @@
                                 <div class="text-xs text-text-muted font-medium">Unit #118 back online.</div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
-
-
 <!-- Version Switcher Sidebar -->
 <div class="fixed top-1/2 right-0 -translate-y-1/2 z-[100] group font-sans">
     <!-- Toggle Button -->
     <div class="bg-indigo-600 text-white p-3 rounded-l-lg shadow-lg cursor-pointer flex items-center justify-center group-hover:hidden">
         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
     </div>
-    
     <!-- Sidebar Content -->
     <div class="h-[80vh] w-56 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-2xl rounded-l-2xl overflow-hidden hidden group-hover:flex flex-col transition-all duration-300">
         <div class="p-4 bg-indigo-50 border-b border-indigo-100 flex items-center justify-between">
@@ -423,9 +387,7 @@
         </div>
         <div class="flex-1 overflow-y-auto p-2 flex flex-col gap-1 text-sm font-medium">
             <a href="basedesign.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Base Design</a>
-            <a href="version2.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2</a>
             <a href="version2_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2 Light</a>
-            <a href="version3.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 3</a>
             <a href="version4_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 4 Light</a>
             <a href="version5_organic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 5 Organic</a>
             <a href="version6_luxury.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 6 Luxury</a>
@@ -437,7 +399,6 @@
             <a href="version12_fintech.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 12 Fintech</a>
             <a href="version13_premium.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 13 Premium</a>
             <a href="version14_neumorphic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 14 Neumorphic</a>
-            <a href="version15_terminal.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 15 Terminal</a>
         </div>
     </div>
 </div>

@@ -41,12 +41,10 @@
         .material-symbols-rounded {
             font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
         }
-        
         body {
             background-color: #E0E5EC;
             color: #2D3748;
         }
-
         /* Tactile Elements */
         .neo-card {
             background-color: #E0E5EC;
@@ -54,7 +52,6 @@
             box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.8);
             transition: all 0.2s ease-in-out;
         }
-
         .neo-button {
             background-color: #E0E5EC;
             border-radius: 16px;
@@ -64,16 +61,13 @@
             transition: all 0.1s ease-in-out;
             border: 1px solid transparent;
         }
-
         .neo-button:hover {
             color: #FF7A00;
         }
-
         .neo-button:active, .neo-button-active {
             box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
             color: #FF7A00;
         }
-
         .neo-input {
             background-color: #E0E5EC;
             border-radius: 16px;
@@ -81,19 +75,16 @@
             border: none;
             outline: none;
         }
-
         .neo-progress-track {
             background-color: #E0E5EC;
             border-radius: 999px;
             box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.6), inset -3px -3px 6px rgba(255, 255, 255, 0.8);
             overflow: hidden;
         }
-
         .neo-progress-fill {
             background-color: #FF7A00;
             box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.1);
         }
-
         /* Custom Map Grid */
         .tactile-map {
             background-image: 
@@ -101,7 +92,6 @@
                 linear-gradient(90deg, rgba(163, 177, 198, 0.2) 2px, transparent 2px);
             background-size: 30px 30px;
         }
-
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -109,10 +99,8 @@
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex p-6 gap-8">
-
     <!-- Sidebar -->
     <aside class="w-64 flex-shrink-0 flex flex-col h-[calc(100vh-3rem)]">
-        
         <!-- Brand -->
         <div class="h-24 flex items-center gap-5 px-2 mb-4">
             <div class="w-14 h-14 rounded-full neo-card flex items-center justify-center text-primary">
@@ -123,7 +111,6 @@
                 <span class="text-xs font-bold text-text-muted tracking-widest uppercase">Ops Hub</span>
             </div>
         </div>
-
         <!-- Navigation -->
         <nav class="flex-1 space-y-4 py-4 px-2">
             <button class="w-full neo-button-active px-5 py-4 flex items-center gap-4 group">
@@ -143,7 +130,6 @@
                 <span class="font-extrabold text-[15px]">Routing Data</span>
             </button>
         </nav>
-
         <!-- Profile -->
         <div class="mt-auto px-2 pt-4">
             <div class="neo-card p-4 flex items-center gap-4">
@@ -157,10 +143,8 @@
             </div>
         </div>
     </aside>
-
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col min-h-[calc(100vh-3rem)]">
-        
         <!-- Top Bar -->
         <header class="h-24 flex items-center justify-between mb-2 px-2 shrink-0">
             <!-- Title -->
@@ -168,7 +152,6 @@
                 <h1 class="text-3xl font-black text-text-main mb-1">Live Overview</h1>
                 <p class="text-sm font-bold text-text-muted">Real-time telemetry from all active units.</p>
             </div>
-
             <!-- Search & Actions -->
             <div class="flex items-center gap-6">
                 <!-- Neumorphic Search -->
@@ -177,22 +160,18 @@
                     <input type="text" placeholder="Search systems..." 
                         class="w-full neo-input py-4 pl-14 pr-6 text-sm font-bold text-text-main placeholder:text-text-muted/60 transition-all focus:ring-2 focus:ring-primary/20">
                 </div>
-                
                 <button class="w-14 h-14 rounded-full neo-button flex items-center justify-center text-text-muted">
                     <span class="material-symbols-rounded">notifications</span>
                     <div class="absolute top-4 right-4 w-2.5 h-2.5 bg-danger rounded-full shadow-[0_0_8px_rgba(255,75,75,0.6)]"></div>
                 </button>
-                
                 <button class="neo-button px-6 py-4 flex items-center gap-2 text-primary">
                     <span class="material-symbols-rounded">add</span>
                     <span class="font-extrabold uppercase tracking-wide text-sm">New Dispatch</span>
                 </button>
             </div>
         </header>
-
         <!-- KPI Row -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 mt-4 px-2">
-            
             <!-- KPI 1 -->
             <div class="neo-card p-8 flex flex-col justify-between relative overflow-hidden">
                 <div class="flex items-center justify-between mb-6">
@@ -208,7 +187,6 @@
                     </p>
                 </div>
             </div>
-
             <!-- KPI 2 -->
             <div class="neo-card p-8 flex flex-col justify-between">
                 <div class="flex items-center justify-between mb-6">
@@ -229,7 +207,6 @@
                     <div class="text-xs font-black text-text-muted text-right">94% Active Yield</div>
                 </div>
             </div>
-
             <!-- KPI 3 -->
             <div class="neo-card p-8 flex flex-col justify-between">
                 <div class="flex items-center justify-between mb-6">
@@ -248,10 +225,8 @@
                 </div>
             </div>
         </div>
-
         <!-- Bottom Row (Map + Alerts) -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 px-2 flex-1 pb-4">
-            
             <!-- Map Component -->
             <div class="lg:col-span-2 neo-card flex flex-col overflow-hidden">
                 <div class="p-6 flex items-center justify-between">
@@ -261,10 +236,8 @@
                         <button class="neo-button px-6 py-2 text-xs uppercase tracking-widest text-text-muted hover:text-primary">Metro</button>
                     </div>
                 </div>
-                
                 <!-- Map Area -->
                 <div class="flex-1 neo-inner m-6 mt-0 rounded-2xl relative overflow-hidden tactile-map">
-                    
                     <!-- Tactile Map Pins -->
                     <div class="absolute top-1/3 left-1/4 group cursor-pointer">
                         <div class="w-8 h-8 rounded-full neo-card flex items-center justify-center group-hover:-translate-y-1 transition-transform">
@@ -274,7 +247,6 @@
                             <div class="neo-card px-4 py-2 text-xs font-black text-text-main">Unit 402</div>
                         </div>
                     </div>
-
                     <div class="absolute top-1/2 right-1/4 group cursor-pointer z-10">
                         <div class="relative w-8 h-8">
                             <span class="absolute inset-0 rounded-full bg-danger opacity-50 animate-ping"></span>
@@ -286,7 +258,6 @@
                             <div class="neo-card px-4 py-2 text-xs font-black text-danger border border-danger/20">Unit 118 (ERR)</div>
                         </div>
                     </div>
-
                     <div class="absolute bottom-1/4 left-1/2 group cursor-pointer">
                         <div class="w-8 h-8 rounded-full neo-card flex items-center justify-center group-hover:-translate-y-1 transition-transform">
                             <div class="w-3 h-3 bg-primary rounded-full"></div>
@@ -297,10 +268,8 @@
                     </div>
                 </div>
             </div>
-
             <!-- Alerts & Feed -->
             <div class="flex flex-col gap-8">
-                
                 <!-- Alert -->
                 <div class="neo-card p-6">
                     <div class="flex items-center justify-between mb-6">
@@ -311,18 +280,15 @@
                     </div>
                     <h4 class="text-xl font-black text-text-main mb-2">Thermal Spike</h4>
                     <p class="text-sm font-bold text-text-muted leading-relaxed mb-6">Unit #118 reporting boiler temp of 104°C. Safety protocol engaged.</p>
-                    
                     <button class="w-full neo-button py-4 text-danger hover:text-danger/80">
                         Dispatch Technician
                     </button>
                 </div>
-
                 <!-- Log -->
                 <div class="neo-card p-6 flex-1 flex flex-col">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-sm font-black uppercase tracking-widest text-text-muted">Activity Log</h3>
                     </div>
-
                     <div class="space-y-6">
                         <!-- Item 1 -->
                         <div class="flex gap-5">
@@ -334,7 +300,6 @@
                                 <p class="text-xs font-bold text-text-muted leading-relaxed">Departed Hub A for Zone 2 restock.</p>
                             </div>
                         </div>
-
                         <!-- Item 2 -->
                         <div class="flex gap-5">
                             <div class="w-12 h-12 rounded-2xl neo-inner flex items-center justify-center text-secondary shrink-0">
@@ -350,21 +315,15 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </main>
-
-
 <!-- Version Switcher Sidebar -->
 <div class="fixed top-1/2 right-0 -translate-y-1/2 z-[100] group font-sans">
     <!-- Toggle Button -->
     <div class="bg-indigo-600 text-white p-3 rounded-l-lg shadow-lg cursor-pointer flex items-center justify-center group-hover:hidden">
         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
     </div>
-    
     <!-- Sidebar Content -->
     <div class="h-[80vh] w-56 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-2xl rounded-l-2xl overflow-hidden hidden group-hover:flex flex-col transition-all duration-300">
         <div class="p-4 bg-indigo-50 border-b border-indigo-100 flex items-center justify-between">
@@ -372,9 +331,7 @@
         </div>
         <div class="flex-1 overflow-y-auto p-2 flex flex-col gap-1 text-sm font-medium">
             <a href="basedesign.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Base Design</a>
-            <a href="version2.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2</a>
             <a href="version2_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2 Light</a>
-            <a href="version3.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 3</a>
             <a href="version4_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 4 Light</a>
             <a href="version5_organic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 5 Organic</a>
             <a href="version6_luxury.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 6 Luxury</a>
@@ -386,7 +343,6 @@
             <a href="version12_fintech.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 12 Fintech</a>
             <a href="version13_premium.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 13 Premium</a>
             <a href="version14_neumorphic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 14 Neumorphic</a>
-            <a href="version15_terminal.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 15 Terminal</a>
         </div>
     </div>
 </div>
