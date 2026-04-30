@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EspressGo Ops Hub | V10 Spatial Glass</title>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: "#FF4D4D", /* Vibrant Coral/Red */
+                        secondary: "#7C3AED", /* Vibrant Violet */
+                        tertiary: "#00F0FF", /* Cyan */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-rounded.outlined {
+            font-variation-settings: 'FILL' 0;
+        }
+        
+        body {
+            background-color: #05050A; /* Extremely dark base */
+            overflow-x: hidden;
+            color: #FFFFFF;
+        }
+
+        /* Ambient Dynamic Orbs for Spatial Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .orb-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(255,77,77,0.4), transparent 60%); animation-delay: 0s; }
+        .orb-2 { bottom: -20%; right: -10%; width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(124,58,237,0.3), transparent 60%); animation-delay: -5s; }
+        .orb-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(0,240,255,0.2), transparent 60%); animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(5%, 10%) scale(1.1); }
+            100% { transform: translate(-5%, 5%) scale(0.9); }
+        }
+
+        /* VisionOS Spatial Glass Style */
+        .spatial-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 40px -10px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2), /* Top edge highlight */
+                inset 0 0 20px 0 rgba(255, 255, 255, 0.02); /* Inner glow */
+        }
+
+        .spatial-glass-solid {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(60px);
+            -webkit-backdrop-filter: blur(60px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .spatial-glass:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex p-6 gap-6 relative">
+
+    <!-- Ambient Spatial Background -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Floating Sidebar -->
+    <aside class="w-24 lg:w-72 flex-shrink-0 flex flex-col h-[calc(100vh-3rem)] sticky top-6">
+        
+        <!-- Brand & Nav container -->
+        <div class="spatial-glass rounded-[2rem] flex-1 flex flex-col p-4 lg:p-6 mb-6">
+            
+            <!-- Brand -->
+            <div class="flex items-center justify-center lg:justify-start gap-4 mb-10 lg:pl-2">
+                <div class="w-12 h-12 rounded-2xl spatial-glass-solid flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-rounded text-white">coffee_maker</span>
+                </div>
+                <div class="hidden lg:flex flex-col">
+                    <span class="font-semibold text-xl tracking-tight text-white leading-none mb-1">EspressGo</span>
+                    <span class="text-[10px] font-semibold text-white/50 uppercase tracking-widest">Ops Control</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 space-y-2">
+                <a href="#" class="flex items-center justify-center lg:justify-start gap-4 px-4 py-3.5 rounded-2xl spatial-glass-solid text-white transition-all group relative">
+                    <span class="material-symbols-rounded outlined">dashboard</span>
+                    <span class="hidden lg:block font-medium text-sm">Overview</span>
+                    <!-- Tooltip for collapsed mode -->
+                    <span class="lg:hidden absolute left-20 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity border border-white/10 whitespace-nowrap z-50 pointer-events-none">Overview</span>
+                </a>
+                <a href="#" class="flex items-center justify-center lg:justify-start gap-4 px-4 py-3.5 rounded-2xl text-white/60 hover:text-white hover:bg-white/5 transition-all group relative">
+                    <span class="material-symbols-rounded outlined">local_shipping</span>
+                    <span class="hidden lg:block font-medium text-sm">Fleet</span>
+                </a>
+                <a href="#" class="flex items-center justify-center lg:justify-start gap-4 px-4 py-3.5 rounded-2xl text-white/60 hover:text-white hover:bg-white/5 transition-all group relative">
+                    <span class="material-symbols-rounded outlined">inventory_2</span>
+                    <span class="hidden lg:block font-medium text-sm">Inventory</span>
+                </a>
+                <a href="#" class="flex items-center justify-center lg:justify-start gap-4 px-4 py-3.5 rounded-2xl text-white/60 hover:text-white hover:bg-white/5 transition-all group relative">
+                    <span class="material-symbols-rounded outlined">route</span>
+                    <span class="hidden lg:block font-medium text-sm">Routing</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- User Profile & Settings -->
+        <div class="spatial-glass rounded-[2rem] p-4 flex items-center justify-center lg:justify-start gap-4 cursor-pointer hover:bg-white/10 transition-all">
+            <div class="relative">
+                <img src="https://ui-avatars.com/api/?name=Ops+Manager&background=ffffff&color=000000" alt="Profile" class="w-12 h-12 rounded-full border-2 border-white/20">
+                <div class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary rounded-full border-2 border-[#05050A]"></div>
+            </div>
+            <div class="hidden lg:flex flex-col">
+                <span class="text-sm font-semibold text-white">M. Wright</span>
+                <span class="text-xs text-white/50 font-medium">Ops Manager</span>
+            </div>
+            <span class="hidden lg:block material-symbols-rounded text-white/40 ml-auto">more_vert</span>
+        </div>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-h-[calc(100vh-3rem)]">
+        
+        <!-- Floating Header -->
+        <header class="h-20 mb-6 spatial-glass rounded-[2rem] px-8 flex items-center justify-between sticky top-6 z-40">
+            <div class="relative w-96">
+                <span class="material-symbols-rounded outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-lg">search</span>
+                <input type="text" placeholder="Search systems, alerts..." 
+                    class="w-full bg-transparent border-none py-2 pl-12 pr-4 text-sm text-white focus:ring-0 placeholder:text-white/40 font-medium">
+            </div>
+
+            <div class="flex items-center gap-6">
+                <button class="spatial-glass-solid px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-white/20 transition-all flex items-center gap-2">
+                    <span class="material-symbols-rounded text-[18px]">add</span>
+                    Dispatch
+                </button>
+                <div class="w-px h-6 bg-white/20"></div>
+                <button class="relative text-white/60 hover:text-white transition-colors flex items-center">
+                    <span class="material-symbols-rounded outlined">notifications</span>
+                    <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-primary rounded-full border-2 border-[#1A1A24] shadow-[0_0_10px_rgba(255,77,77,0.8)]"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="flex-1 space-y-6">
+            
+            <!-- Welcome Title -->
+            <div class="px-2 mb-8">
+                <h1 class="text-4xl font-bold tracking-tight mb-2">Global Operations</h1>
+                <p class="text-white/60 font-medium">System telemetry and live fleet monitoring.</p>
+            </div>
+
+            <!-- KPI Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- KPI 1 -->
+                <div class="spatial-glass rounded-[2rem] p-8">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-12 h-12 rounded-xl spatial-glass-solid flex items-center justify-center">
+                            <span class="material-symbols-rounded text-tertiary">network_check</span>
+                        </div>
+                        <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white/60 uppercase tracking-widest">Network</span>
+                    </div>
+                    <h3 class="text-5xl font-bold tracking-tight mb-2">99.98<span class="text-2xl text-white/40">%</span></h3>
+                    <p class="text-sm font-medium text-tertiary flex items-center gap-1">
+                        <span class="material-symbols-rounded text-sm">trending_up</span> +0.02%
+                    </p>
+                </div>
+
+                <!-- KPI 2 -->
+                <div class="spatial-glass rounded-[2rem] p-8">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-12 h-12 rounded-xl spatial-glass-solid flex items-center justify-center">
+                            <span class="material-symbols-rounded text-white">airport_shuttle</span>
+                        </div>
+                        <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white/60 uppercase tracking-widest">Yield</span>
+                    </div>
+                    <h3 class="text-5xl font-bold tracking-tight mb-4">142<span class="text-2xl text-white/40">/150</span></h3>
+                    <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div class="h-full bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)]" style="width: 94%"></div>
+                    </div>
+                </div>
+
+                <!-- KPI 3 -->
+                <div class="spatial-glass rounded-[2rem] p-8 relative overflow-hidden">
+                    <!-- Subtle background highlight for the success metric -->
+                    <div class="absolute -right-20 -top-20 w-40 h-40 bg-tertiary opacity-10 rounded-full blur-3xl"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl spatial-glass-solid flex items-center justify-center">
+                                <span class="material-symbols-rounded text-white">task_alt</span>
+                            </div>
+                            <span class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white/60 uppercase tracking-widest">Success</span>
+                        </div>
+                        <h3 class="text-5xl font-bold tracking-tight mb-3">96.4<span class="text-2xl text-white/40">%</span></h3>
+                        <p class="text-sm font-medium text-white/50">Exceeds 95% target goal</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Main Map / Chart Area -->
+                <div class="lg:col-span-2 spatial-glass rounded-[2.5rem] p-1 flex flex-col min-h-[500px]">
+                    <div class="px-8 py-6 flex items-center justify-between border-b border-white/5">
+                        <h3 class="text-lg font-semibold tracking-tight">Live Territory View</h3>
+                        <div class="flex bg-white/5 rounded-xl p-1 border border-white/5">
+                            <button class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-white/10 text-white shadow-sm">Global</button>
+                            <button class="px-4 py-1.5 text-xs font-medium text-white/50 hover:text-white transition-colors">Regional</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 relative rounded-b-[2.5rem] overflow-hidden flex items-center justify-center bg-black/20">
+                        <!-- Simulated abstract 3D map -->
+                        <div class="absolute inset-0" style="background-image: repeating-linear-gradient(rgba(255,255,255,0.02) 0 1px, transparent 1px 100%), repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 100%); background-size: 40px 40px;"></div>
+                        
+                        <!-- Map Pins -->
+                        <div class="absolute top-1/3 left-1/4 group cursor-pointer">
+                            <div class="relative">
+                                <div class="w-4 h-4 bg-tertiary rounded-full shadow-[0_0_15px_rgba(0,240,255,0.8)] border-2 border-white/20"></div>
+                                <div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="spatial-glass-solid px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border border-white/20">Unit 402</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute top-1/2 right-1/3 group cursor-pointer">
+                            <div class="relative">
+                                <div class="w-5 h-5 bg-primary rounded-full shadow-[0_0_20px_rgba(255,77,77,0.8)] border-2 border-white/20 animate-pulse"></div>
+                                <div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-100">
+                                    <div class="bg-primary/20 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border border-primary/50 text-white">Unit 118 - ERR</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-1/4 left-1/2 group cursor-pointer">
+                            <div class="relative">
+                                <div class="w-4 h-4 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.8)] border-2 border-white/20"></div>
+                                <div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="spatial-glass-solid px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border border-white/20">Unit 883</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar (Alerts/Log) -->
+                <div class="flex flex-col gap-6">
+                    
+                    <!-- Alert Card -->
+                    <div class="spatial-glass rounded-[2rem] p-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-primary/10"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-rounded">thermostat</span>
+                                </div>
+                                <span class="bg-primary/20 text-primary border border-primary/30 px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-widest">Critical</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Thermal Spike</h4>
+                            <p class="text-sm text-white/70 font-medium leading-relaxed mb-6">Unit #118 reporting boiler temp of 104°C. Safety shutdown engaged.</p>
+                            
+                            <button class="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-[0_0_20px_rgba(255,77,77,0.4)] hover:bg-red-500 transition-colors">
+                                Dispatch Technician
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Activity Log -->
+                    <div class="spatial-glass rounded-[2rem] flex-1 flex flex-col p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-sm font-semibold uppercase tracking-widest text-white/60">Live Log</h3>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full spatial-glass-solid flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-rounded text-[18px] text-white">local_shipping</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold mb-0.5">Dispatch #4092</p>
+                                    <p class="text-xs text-white/50">Departed Hub A for Zone 2 restock.</p>
+                                </div>
+                                <span class="text-[10px] text-white/40 ml-auto font-medium">Just now</span>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full spatial-glass-solid flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-rounded text-[18px] text-white/60">build</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold mb-0.5">Maintenance Complete</p>
+                                    <p class="text-xs text-white/50">Unit #118 hardware verified.</p>
+                                </div>
+                                <span class="text-[10px] text-white/40 ml-auto font-medium">14m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+
+<!-- Version Switcher Sidebar -->
+<div class="fixed top-1/2 right-0 -translate-y-1/2 z-[100] group font-sans">
+    <!-- Toggle Button -->
+    <div class="bg-indigo-600 text-white p-3 rounded-l-lg shadow-lg cursor-pointer flex items-center justify-center group-hover:hidden">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+    </div>
+    
+    <!-- Sidebar Content -->
+    <div class="h-[80vh] w-56 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-2xl rounded-l-2xl overflow-hidden hidden group-hover:flex flex-col transition-all duration-300">
+        <div class="p-4 bg-indigo-50 border-b border-indigo-100 flex items-center justify-between">
+            <h3 class="font-bold text-indigo-900 text-sm">Design Versions</h3>
+        </div>
+        <div class="flex-1 overflow-y-auto p-2 flex flex-col gap-1 text-sm font-medium">
+            <a href="basedesign.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Base Design</a>
+            <a href="version2.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2</a>
+            <a href="version2_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2 Light</a>
+            <a href="version3.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 3</a>
+            <a href="version4_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 4 Light</a>
+            <a href="version5_organic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 5 Organic</a>
+            <a href="version6_luxury.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 6 Luxury</a>
+            <a href="version7_hud.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 7 HUD</a>
+            <a href="version8_simple.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 8 Simple</a>
+            <a href="version9_swiss.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 9 Swiss</a>
+            <a href="version10_spatial.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 10 Spatial</a>
+            <a href="version11_wireframe.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 11 Wireframe</a>
+            <a href="version12_fintech.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 12 Fintech</a>
+            <a href="version13_premium.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 13 Premium</a>
+            <a href="version14_neumorphic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 14 Neumorphic</a>
+            <a href="version15_terminal.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 15 Terminal</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

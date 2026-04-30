@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EspressGo Ops Hub | V2</title>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <!-- Google Fonts: Outfit & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#0A0A0A",
+                        surface: "#141414",
+                        "surface-elevated": "#1A1A1A",
+                        primary: "#FF6B2B", /* Vibrant espresso crema / orange */
+                        "primary-glow": "rgba(255, 107, 43, 0.5)",
+                        secondary: "#D4B595", /* Latte/creamy tone */
+                        tertiary: "#2DD4BF", /* Teal/cyan for live/success techy feel */
+                        accent: "#8B5CF6", /* Purple accent */
+                        danger: "#EF4444",
+                        "danger-glow": "rgba(239, 68, 68, 0.4)",
+                        warning: "#F59E0B",
+                        "text-main": "#FAFAFA",
+                        "text-muted": "#A1A1AA",
+                        border: "#27272A",
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px -5px var(--tw-shadow-color)',
+                        'glow-lg': '0 0 30px -5px var(--tw-shadow-color)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'mesh': 'radial-gradient(at 40% 20%, rgba(255, 107, 43, 0.1) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(45, 212, 191, 0.05) 0px, transparent 50%), radial-gradient(at 0% 50%, rgba(139, 92, 246, 0.05) 0px, transparent 50%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-rounded.outlined {
+            font-variation-settings: 'FILL' 0;
+        }
+        
+        body {
+            background-color: #0A0A0A;
+            background-image: radial-gradient(at 40% 20%, rgba(255, 107, 43, 0.08) 0px, transparent 50%), 
+                              radial-gradient(at 80% 0%, rgba(45, 212, 191, 0.05) 0px, transparent 50%), 
+                              radial-gradient(at 0% 50%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card {
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.4) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 107, 43, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272A;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3F3F46;
+        }
+    </style>
+</head>
+<body class="font-sans text-text-main antialiased selection:bg-primary/30 selection:text-primary min-h-screen flex">
+
+<!-- Sidebar -->
+<aside class="w-64 fixed h-full z-50 glass-panel border-r border-white/5 flex flex-col py-6 px-4 transition-all duration-300">
+    <!-- Brand -->
+    <div class="flex items-center gap-3 px-2 mb-10">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-orange-600 flex items-center justify-center shadow-glow shadow-primary/30">
+            <span class="material-symbols-rounded text-white">coffee_maker</span>
+        </div>
+        <div class="flex flex-col">
+            <span class="font-display font-bold text-xl tracking-wide text-white">EspressGo</span>
+            <span class="text-[10px] font-medium text-primary uppercase tracking-[0.2em]">Ops Control</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 space-y-1.5">
+        <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20 transition-all">
+            <span class="material-symbols-rounded outlined">dashboard</span>
+            <span class="font-medium text-sm">Dashboard</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl text-text-muted hover:text-white hover:bg-white/5 transition-all group">
+            <span class="material-symbols-rounded outlined group-hover:text-white transition-colors">local_shipping</span>
+            <span class="font-medium text-sm">Fleet Status</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl text-text-muted hover:text-white hover:bg-white/5 transition-all group">
+            <span class="material-symbols-rounded outlined group-hover:text-white transition-colors">inventory_2</span>
+            <span class="font-medium text-sm">Inventory</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl text-text-muted hover:text-white hover:bg-white/5 transition-all group">
+            <span class="material-symbols-rounded outlined group-hover:text-white transition-colors">route</span>
+            <span class="font-medium text-sm">Routing</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl text-text-muted hover:text-white hover:bg-white/5 transition-all group">
+            <span class="material-symbols-rounded outlined group-hover:text-white transition-colors">analytics</span>
+            <span class="font-medium text-sm">Analytics</span>
+        </a>
+    </nav>
+
+    <!-- Bottom Actions -->
+    <div class="pt-6 border-t border-white/5 space-y-4">
+        <button class="w-full bg-white/5 hover:bg-white/10 text-white py-2.5 px-4 rounded-xl font-medium text-sm flex items-center justify-center gap-2 border border-white/10 transition-all">
+            <span class="material-symbols-rounded text-lg outlined">add</span>
+            New Dispatch
+        </button>
+        <div class="flex items-center gap-3 px-2 py-2 rounded-xl bg-white/5 border border-white/5 cursor-pointer hover:bg-white/10 transition-all">
+            <img src="https://ui-avatars.com/api/?name=Ops+Manager&background=27272A&color=FAFAFA" alt="Profile" class="w-8 h-8 rounded-lg">
+            <div class="flex flex-col">
+                <span class="text-xs font-semibold text-white">M. Wright</span>
+                <span class="text-[10px] text-tertiary">Online</span>
+            </div>
+            <span class="material-symbols-rounded outlined ml-auto text-text-muted text-sm">unfold_more</span>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen relative">
+    
+    <!-- Header -->
+    <header class="h-20 glass-panel sticky top-0 z-40 border-b border-white/5 px-8 flex items-center justify-between">
+        <div class="relative w-96">
+            <span class="material-symbols-rounded outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-lg">search</span>
+            <input type="text" placeholder="Search units, alerts, or zones..." 
+                class="w-full bg-black/40 border border-white/10 rounded-full py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-text-muted transition-all">
+            <div class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                <kbd class="hidden sm:inline-block border border-white/10 rounded px-2 text-[10px] font-sans text-text-muted bg-white/5">⌘K</kbd>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-tertiary/10 border border-tertiary/20">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+                </span>
+                <span class="text-xs font-medium text-tertiary">System Optimal</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button class="relative text-text-muted hover:text-white transition-colors">
+                    <span class="material-symbols-rounded outlined">notifications</span>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full border border-[#141414]"></span>
+                </button>
+                <button class="text-text-muted hover:text-white transition-colors">
+                    <span class="material-symbols-rounded outlined">settings</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="p-8 max-w-7xl mx-auto w-full space-y-8">
+        
+        <!-- Page Title -->
+        <div>
+            <h1 class="font-display text-3xl font-semibold text-white mb-1">Command Center</h1>
+            <p class="text-text-muted text-sm">Real-time telemetry and fleet operations overview.</p>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- KPI 1 -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-text-muted text-sm font-medium mb-1">Network Uptime</p>
+                        <h3 class="font-display text-4xl font-semibold text-white">99.98<span class="text-xl text-text-muted">%</span></h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-tertiary/10 flex items-center justify-center border border-tertiary/20 text-tertiary">
+                        <span class="material-symbols-rounded">network_check</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                    <span class="flex items-center text-tertiary font-medium">
+                        <span class="material-symbols-rounded text-sm">trending_up</span> +0.02%
+                    </span>
+                    <span class="text-text-muted">vs last 24h</span>
+                </div>
+            </div>
+
+            <!-- KPI 2 -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-text-muted text-sm font-medium mb-1">Active Fleet</p>
+                        <h3 class="font-display text-4xl font-semibold text-white">142<span class="text-xl text-text-muted">/150</span></h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/20 text-accent">
+                        <span class="material-symbols-rounded">airport_shuttle</span>
+                    </div>
+                </div>
+                <div class="w-full bg-black/40 rounded-full h-1.5 mt-4 mb-2 overflow-hidden border border-white/5">
+                    <div class="bg-gradient-to-r from-accent/50 to-accent h-1.5 rounded-full" style="width: 94%"></div>
+                </div>
+                <p class="text-xs text-text-muted flex justify-between">
+                    <span>8 in maintenance</span>
+                    <span class="text-white font-medium">94% Active</span>
+                </p>
+            </div>
+
+            <!-- KPI 3 -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all"></div>
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-text-muted text-sm font-medium mb-1">Fulfillment Rate</p>
+                        <h3 class="font-display text-4xl font-semibold text-white">96.4<span class="text-xl text-text-muted">%</span></h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 text-primary">
+                        <span class="material-symbols-rounded">task_alt</span>
+                    </div>
+                </div>
+                <div class="flex items-end gap-1 h-8 mt-2">
+                    <div class="w-full bg-primary/20 rounded-t h-[40%] group-hover:bg-primary/30 transition-colors"></div>
+                    <div class="w-full bg-primary/40 rounded-t h-[60%] group-hover:bg-primary/50 transition-colors"></div>
+                    <div class="w-full bg-primary/60 rounded-t h-[85%] group-hover:bg-primary/70 transition-colors"></div>
+                    <div class="w-full bg-primary/80 rounded-t h-[70%] group-hover:bg-primary/90 transition-colors"></div>
+                    <div class="w-full bg-primary rounded-t h-[95%] shadow-glow shadow-primary/40"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Map/Live View -->
+            <div class="lg:col-span-2 glass-card rounded-2xl p-1 flex flex-col border border-white/5 h-[480px]">
+                <div class="p-4 flex items-center justify-between border-b border-white/5">
+                    <h3 class="font-display font-medium text-white flex items-center gap-2">
+                        <span class="material-symbols-rounded text-text-muted text-xl outlined">map</span>
+                        Live Fleet Map
+                    </h3>
+                    <div class="flex bg-black/40 rounded-lg p-1 border border-white/5">
+                        <button class="px-3 py-1 text-xs font-medium rounded-md bg-white/10 text-white">All Zones</button>
+                        <button class="px-3 py-1 text-xs font-medium rounded-md text-text-muted hover:text-white transition-colors">Downtown</button>
+                        <button class="px-3 py-1 text-xs font-medium rounded-md text-text-muted hover:text-white transition-colors">Uptown</button>
+                    </div>
+                </div>
+                <div class="flex-1 relative bg-[#0D0D0D] rounded-b-xl overflow-hidden">
+                    <!-- High-tech Map Background Simulation -->
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+                    
+                    <!-- Radar Sweep Effect -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+                        <div class="w-[800px] h-[800px] border border-tertiary/30 rounded-full absolute animate-ping" style="animation-duration: 4s;"></div>
+                        <div class="w-[400px] h-[400px] border border-tertiary/20 rounded-full absolute"></div>
+                        <div class="w-[200px] h-[200px] border border-tertiary/40 rounded-full absolute"></div>
+                    </div>
+
+                    <!-- Map Pins -->
+                    <div class="absolute top-1/3 left-1/3 flex flex-col items-center hover:z-10 cursor-pointer group">
+                        <div class="relative w-4 h-4">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-4 w-4 bg-tertiary border-2 border-[#0D0D0D]"></span>
+                        </div>
+                        <span class="mt-1 px-2 py-0.5 rounded bg-black/80 text-[9px] font-mono text-tertiary border border-tertiary/30 group-hover:scale-110 transition-transform">UNIT-402</span>
+                    </div>
+
+                    <div class="absolute top-1/2 right-1/3 flex flex-col items-center hover:z-10 cursor-pointer group">
+                        <div class="relative w-4 h-4">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-4 w-4 bg-danger border-2 border-[#0D0D0D]"></span>
+                        </div>
+                        <span class="mt-1 px-2 py-0.5 rounded bg-black/80 text-[9px] font-mono text-danger border border-danger/30 group-hover:scale-110 transition-transform">UNIT-118</span>
+                    </div>
+
+                    <div class="absolute bottom-1/4 left-1/2 flex flex-col items-center hover:z-10 cursor-pointer group">
+                        <div class="w-4 h-4 rounded-full bg-primary border-2 border-[#0D0D0D] shadow-glow shadow-primary/50"></div>
+                        <span class="mt-1 px-2 py-0.5 rounded bg-black/80 text-[9px] font-mono text-primary border border-primary/30 group-hover:scale-110 transition-transform">UNIT-883</span>
+                    </div>
+
+                    <!-- Legend Overlay -->
+                    <div class="absolute bottom-4 left-4 glass-panel rounded-xl p-3 flex gap-4 text-xs font-medium">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                            <span class="text-text-muted">Active</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-primary shadow-glow shadow-primary/50"></div>
+                            <span class="text-text-muted">Routing</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-danger animate-pulse"></div>
+                            <span class="text-text-muted">Alert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts & Activity Side Column -->
+            <div class="space-y-6 flex flex-col">
+                <!-- Critical Alert -->
+                <div class="glass-card rounded-2xl p-5 border-l-4 border-l-danger relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-danger/10 text-danger text-[10px] font-bold px-2 py-1 rounded-bl-lg backdrop-blur-md border-b border-l border-danger/20">CRITICAL</div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-danger/10 flex items-center justify-center shrink-0 text-danger shadow-glow shadow-danger/20 border border-danger/20">
+                            <span class="material-symbols-rounded">thermostat</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium text-sm mb-1">Temperature Spike</h4>
+                            <p class="text-text-muted text-xs leading-relaxed mb-3">Unit #118 reporting boiler temp of 104°C. Safety shutdown engaged.</p>
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1.5 bg-danger/20 hover:bg-danger/30 text-danger rounded-lg text-xs font-medium transition-colors border border-danger/20">Dispatch Tech</button>
+                                <button class="px-3 py-1.5 bg-white/5 hover:bg-white/10 text-white rounded-lg text-xs font-medium transition-colors border border-white/5">Override</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning Alert -->
+                <div class="glass-card rounded-2xl p-5 border-l-4 border-l-warning relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-warning/10 text-warning text-[10px] font-bold px-2 py-1 rounded-bl-lg backdrop-blur-md border-b border-l border-warning/20">WARNING</div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-warning/10 flex items-center justify-center shrink-0 text-warning shadow-glow shadow-warning/20 border border-warning/20">
+                            <span class="material-symbols-rounded">battery_1_bar</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium text-sm mb-1">Low Stock Supply</h4>
+                            <p class="text-text-muted text-xs leading-relaxed mb-3">Zone 4 (North Station) below 15% bean capacity.</p>
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1.5 bg-warning/20 hover:bg-warning/30 text-warning rounded-lg text-xs font-medium transition-colors border border-warning/20">Restock Route</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity List -->
+                <div class="glass-card rounded-2xl p-5 flex-1 flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-display font-medium text-white">Live Activity</h3>
+                        <button class="text-primary text-xs hover:underline transition-all">View Log</button>
+                    </div>
+                    <div class="space-y-4 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
+                        
+                        <!-- Activity Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#1A1A1A] group-[.is-active]:bg-primary/20 group-[.is-active]:border-primary/30 text-text-muted group-[.is-active]:text-primary shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition-colors">
+                                <span class="material-symbols-rounded text-sm">local_shipping</span>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm group-hover:bg-white/10 transition-colors">
+                                <div class="flex items-center justify-between mb-1">
+                                    <div class="font-medium text-white text-xs">Dispatch #4092</div>
+                                    <time class="text-[10px] text-text-muted font-mono">Just now</time>
+                                </div>
+                                <div class="text-[11px] text-text-muted">Departed for Zone 2 restock.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#1A1A1A] text-tertiary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-glow shadow-tertiary/10">
+                                <span class="material-symbols-rounded text-sm">build</span>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm group-hover:bg-white/10 transition-colors">
+                                <div class="flex items-center justify-between mb-1">
+                                    <div class="font-medium text-white text-xs">Maintenance</div>
+                                    <time class="text-[10px] text-text-muted font-mono">14m ago</time>
+                                </div>
+                                <div class="text-[11px] text-text-muted">Unit #118 back online.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Version Switcher Sidebar -->
+<div class="fixed top-1/2 right-0 -translate-y-1/2 z-[100] group font-sans">
+    <!-- Toggle Button -->
+    <div class="bg-indigo-600 text-white p-3 rounded-l-lg shadow-lg cursor-pointer flex items-center justify-center group-hover:hidden">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+    </div>
+    
+    <!-- Sidebar Content -->
+    <div class="h-[80vh] w-56 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-2xl rounded-l-2xl overflow-hidden hidden group-hover:flex flex-col transition-all duration-300">
+        <div class="p-4 bg-indigo-50 border-b border-indigo-100 flex items-center justify-between">
+            <h3 class="font-bold text-indigo-900 text-sm">Design Versions</h3>
+        </div>
+        <div class="flex-1 overflow-y-auto p-2 flex flex-col gap-1 text-sm font-medium">
+            <a href="basedesign.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Base Design</a>
+            <a href="version2.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2</a>
+            <a href="version2_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2 Light</a>
+            <a href="version3.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 3</a>
+            <a href="version4_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 4 Light</a>
+            <a href="version5_organic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 5 Organic</a>
+            <a href="version6_luxury.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 6 Luxury</a>
+            <a href="version7_hud.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 7 HUD</a>
+            <a href="version8_simple.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 8 Simple</a>
+            <a href="version9_swiss.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 9 Swiss</a>
+            <a href="version10_spatial.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 10 Spatial</a>
+            <a href="version11_wireframe.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 11 Wireframe</a>
+            <a href="version12_fintech.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 12 Fintech</a>
+            <a href="version13_premium.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 13 Premium</a>
+            <a href="version14_neumorphic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 14 Neumorphic</a>
+            <a href="version15_terminal.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 15 Terminal</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

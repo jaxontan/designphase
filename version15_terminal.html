@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EspressGo Ops Hub | V15 Terminal CRT</title>
+    <!-- Google Fonts: VT323 -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['VT323', 'monospace'],
+                    },
+                    colors: {
+                        base: "#000000",
+                        term: "#39FF14", /* Phosphor Green */
+                        "term-dim": "#1B7A0A",
+                        alert: "#FF003C", /* CRT Red */
+                        warn: "#FFB000", /* Amber */
+                    },
+                    boxShadow: {
+                        'glow': '0 0 10px rgba(57, 255, 20, 0.5)',
+                        'glow-alert': '0 0 10px rgba(255, 0, 60, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #39FF14;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* CRT Scanline Overlay */
+        .crt::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 100;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* CRT Flicker */
+        .crt::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: rgba(57, 255, 20, 0.02);
+            opacity: 0;
+            z-index: 100;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.02; }
+            50% { opacity: 0.05; }
+            100% { opacity: 0.02; }
+        }
+
+        /* Terminal Text Glow */
+        .phosphor {
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+        }
+
+        .phosphor-alert {
+            text-shadow: 0 0 5px rgba(255, 0, 60, 0.5);
+        }
+
+        /* Terminal Borders */
+        .term-border {
+            border: 2px solid #39FF14;
+            box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.2), 0 0 10px rgba(57, 255, 20, 0.2);
+        }
+
+        .term-border-alert {
+            border: 2px solid #FF003C;
+            box-shadow: inset 0 0 10px rgba(255, 0, 60, 0.2), 0 0 10px rgba(255, 0, 60, 0.2);
+            animation: pulse-alert 2s infinite;
+        }
+
+        @keyframes pulse-alert {
+            0% { box-shadow: inset 0 0 10px rgba(255, 0, 60, 0.2), 0 0 10px rgba(255, 0, 60, 0.2); }
+            50% { box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.5), 0 0 20px rgba(255, 0, 60, 0.5); }
+            100% { box-shadow: inset 0 0 10px rgba(255, 0, 60, 0.2), 0 0 10px rgba(255, 0, 60, 0.2); }
+        }
+
+        .term-button {
+            background: transparent;
+            color: #39FF14;
+            border: 1px solid #39FF14;
+            transition: all 0.1s;
+            cursor: pointer;
+        }
+
+        .term-button:hover {
+            background: #39FF14;
+            color: #000000;
+        }
+
+        .term-button-alert {
+            background: #FF003C;
+            color: #000000;
+            border: 1px solid #FF003C;
+            text-transform: uppercase;
+        }
+
+        /* Blinking Cursor */
+        .cursor-blink::after {
+            content: "█";
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #000; border-left: 2px solid #1B7A0A; }
+        ::-webkit-scrollbar-thumb { background: #39FF14; }
+    </style>
+</head>
+<body class="font-mono crt h-screen flex flex-col p-4 selection:bg-term selection:text-base">
+
+    <!-- Header System Info -->
+    <header class="flex justify-between items-end border-b-2 border-term pb-2 mb-4 shrink-0">
+        <div>
+            <h1 class="text-5xl uppercase tracking-widest phosphor mb-2">ESPRESSGO_OS<span class="cursor-blink"></span></h1>
+            <p class="text-xl text-term-dim">SYS.VER: 4.0.21 // UPLINK: ESTABLISHED</p>
+        </div>
+        <div class="text-right text-xl uppercase">
+            <p>USER: ROOT_OPS</p>
+            <p>LOC: NODE_PRIME</p>
+            <p class="phosphor">STATUS: [ ONLINE ]</p>
+        </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="flex-1 grid grid-cols-4 gap-4 overflow-hidden">
+        
+        <!-- Left Nav / Commands -->
+        <aside class="col-span-1 term-border p-4 flex flex-col">
+            <h2 class="text-2xl mb-4 border-b border-term-dim pb-1">>> EXECUTABLES</h2>
+            
+            <nav class="flex-1 space-y-2 text-xl">
+                <div class="bg-term text-base px-2 py-1">> ./DASHBOARD.exe</div>
+                <div class="hover:bg-term-dim hover:text-base px-2 py-1 cursor-pointer">> ./FLEET_TRACK.sh</div>
+                <div class="hover:bg-term-dim hover:text-base px-2 py-1 cursor-pointer">> ./INVENTORY_DB.sql</div>
+                <div class="hover:bg-term-dim hover:text-base px-2 py-1 cursor-pointer">> ./ROUTE_CALC.py</div>
+            </nav>
+
+            <div class="mt-auto border-t border-term-dim pt-4">
+                <p class="text-lg text-term-dim mb-2">AWAITING INPUT...</p>
+                <div class="flex">
+                    <span class="mr-2">></span>
+                    <input type="text" class="bg-transparent border-none outline-none text-term w-full phosphor" value="DISPATCH --NEW">
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Data Matrix -->
+        <section class="col-span-2 flex flex-col gap-4">
+            
+            <!-- Telemetry Row -->
+            <div class="grid grid-cols-2 gap-4 shrink-0">
+                <div class="term-border p-4">
+                    <p class="text-lg text-term-dim mb-2">>> NET_UPTIME_PCT</p>
+                    <p class="text-6xl phosphor">99.98%</p>
+                    <p class="text-lg mt-2">[+0.02% DELTA]</p>
+                </div>
+                <div class="term-border p-4">
+                    <p class="text-lg text-term-dim mb-2">>> FLEET_YIELD</p>
+                    <p class="text-6xl phosphor">142/150</p>
+                    <div class="w-full border border-term h-4 mt-2 p-0.5">
+                        <div class="bg-term h-full" style="width: 94%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ASCII Map -->
+            <div class="term-border p-4 flex-1 flex flex-col">
+                <div class="flex justify-between items-center mb-4 border-b border-term-dim pb-1">
+                    <h2 class="text-2xl">>> TERRITORY_MAP.dat</h2>
+                    <span class="bg-term text-base px-2">LIVE</span>
+                </div>
+                
+                <div class="flex-1 overflow-hidden relative text-sm sm:text-base md:text-lg leading-none whitespace-pre font-mono text-term-dim flex items-center justify-center">
+<!-- ASCII ART MAP PLACEHOLDER -->
++---------------------------------------------------+
+|                                                   |
+|    .       *          .          .      *         |
+|         .          [U-402]          .             |
+|   .          .      *         .            .      |
+|                                                   |
+|        *          .          *           .        |
+|   .         !U-118!                 .             |
+|                  .            *                   |
+|       .                 .            .            |
+|                                                   |
+|   *           .         [U-883]           *       |
+|          .          *           .                 |
+|                                                   |
++---------------------------------------------------+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Right System Logs -->
+        <section class="col-span-1 flex flex-col gap-4">
+            
+            <!-- Critical Error -->
+            <div class="term-border-alert p-4 text-alert bg-[#110000]">
+                <div class="flex justify-between mb-2">
+                    <h2 class="text-2xl phosphor-alert">>> SYS_ERROR</h2>
+                    <span class="animate-pulse">[! ! !]</span>
+                </div>
+                <p class="text-xl mb-2">ERR_CODE: THERMAL_SPIKE</p>
+                <p class="text-lg mb-4 opacity-80">UNIT #118 EXCEEDED SAFE OPERATING PARAMETERS (104C). CORE SHUTDOWN IMMINENT.</p>
+                <button class="w-full term-button-alert py-2 text-xl font-bold">INIT_OVERRIDE</button>
+            </div>
+
+            <!-- Terminal Log -->
+            <div class="term-border p-4 flex-1 flex flex-col overflow-hidden">
+                <h2 class="text-2xl mb-4 border-b border-term-dim pb-1">>> SYSTEM_LOG</h2>
+                <div class="flex-1 overflow-y-auto space-y-2 text-lg">
+                    <p><span class="text-term-dim">[14:02:44]</span> DISPATCH_ID 4092 INITIALIZED.</p>
+                    <p><span class="text-term-dim">[14:02:45]</span> U-4092 DEPARTED HUB_ALPHA.</p>
+                    <p><span class="text-term-dim">[14:10:12]</span> SYS_PING: ALL NODES NOMINAL.</p>
+                    <p><span class="text-term-dim">[14:15:00]</span> MAINT_ROUTINE COMPLETE UNIT #088.</p>
+                    <p><span class="text-term-dim">[14:18:33]</span> INVENTORY_DB SYNC SUCCESS.</p>
+                    <p class="text-alert phosphor-alert"><span class="text-alert opacity-50">[14:22:10]</span> WARNING: U-118 TEMP RISING.</p>
+                    <p class="text-alert phosphor-alert"><span class="text-alert opacity-50">[14:24:05]</span> CRITICAL: U-118 THRESHOLD BREACH.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+<!-- Version Switcher Sidebar -->
+<div class="fixed top-1/2 right-0 -translate-y-1/2 z-[100] group font-sans">
+    <!-- Toggle Button -->
+    <div class="bg-indigo-600 text-white p-3 rounded-l-lg shadow-lg cursor-pointer flex items-center justify-center group-hover:hidden">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+    </div>
+    
+    <!-- Sidebar Content -->
+    <div class="h-[80vh] w-56 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-2xl rounded-l-2xl overflow-hidden hidden group-hover:flex flex-col transition-all duration-300">
+        <div class="p-4 bg-indigo-50 border-b border-indigo-100 flex items-center justify-between">
+            <h3 class="font-bold text-indigo-900 text-sm">Design Versions</h3>
+        </div>
+        <div class="flex-1 overflow-y-auto p-2 flex flex-col gap-1 text-sm font-medium">
+            <a href="basedesign.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Base Design</a>
+            <a href="version2.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2</a>
+            <a href="version2_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 2 Light</a>
+            <a href="version3.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 3</a>
+            <a href="version4_light.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 4 Light</a>
+            <a href="version5_organic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 5 Organic</a>
+            <a href="version6_luxury.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 6 Luxury</a>
+            <a href="version7_hud.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 7 HUD</a>
+            <a href="version8_simple.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 8 Simple</a>
+            <a href="version9_swiss.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 9 Swiss</a>
+            <a href="version10_spatial.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 10 Spatial</a>
+            <a href="version11_wireframe.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 11 Wireframe</a>
+            <a href="version12_fintech.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 12 Fintech</a>
+            <a href="version13_premium.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 13 Premium</a>
+            <a href="version14_neumorphic.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 14 Neumorphic</a>
+            <a href="version15_terminal.html" class="px-3 py-2 text-neutral-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">Version 15 Terminal</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
